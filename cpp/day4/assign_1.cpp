@@ -1,36 +1,41 @@
 #include <iostream>
 using namespace std;
 
-class Date {
+class Date
+{
 	int day, month, year;
-		
-//	Default
+
+	//	Default
 public:
-	Date() {
+	Date()
+	{
 		day = 1;
 		month = 1;
 		year = 2000;
 	}
-//	Parametrized constr
-	Date(int day, int month, int year) {
-		this -> day = day;
-		this -> month = month;
-		this -> year = year;
+	//	Parametrized constr
+	Date(int day, int month, int year)
+	{
+		this->day = day;
+		this->month = month;
+		this->year = year;
 	}
-	
-	void display() {
+
+	void display()
+	{
 		cout << "----Display date--------" << endl;
 		cout << "Date is " << day << "-" << month << "-" << year << endl;
 	}
-	
 };
 
-
-
-int main2() {
+int main()
+{
+	cout << "----Constructors----" << endl;
+	cout << "Using default constr" << endl;
 	Date s1;
 	s1.display();
-	Date s2(13, 4, 2005);
+	cout << "Using parameterized constr" << endl;
+	Date s2(15, 4, 2024);
 	s2.display();
 	return 0;
 }

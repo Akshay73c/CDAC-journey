@@ -82,7 +82,6 @@ public:
     ComplexNum()
     {
         cout << "-----------Default constr of ComplexNum called-----------" << endl;
-
         real = 0;
         imaginary = 0;
     }
@@ -133,9 +132,12 @@ int main()
             Box box;
             int l, b, h;
             string col;
-            box.display();
             cout << "Enter Length, breadth, height: ";
             cin >> l >> b >> h;
+            cout << "Enter color: ";
+            cin >> col;
+            Box box2(l, b, h, col);
+            box2.display();
 
             break;
         }
@@ -146,9 +148,10 @@ int main()
             cout << "---------------ComplexNum-----------------" << endl;
             num1.display();
             int r, i;
-            cout << "Enter real and imaginary parts";
+            cout << "Enter real and imaginary parts: ";
             cin >> r >> i;
             ComplexNum num2(r, i);
+            num2.display();
             break;
         }
         }

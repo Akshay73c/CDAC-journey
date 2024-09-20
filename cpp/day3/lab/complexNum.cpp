@@ -19,10 +19,18 @@ public:
         imaginary = i;
     }
 
-public:
     void display()
     {
         cout << "Complex Num entered is " << real << " + " << imaginary << "i." << endl;
+    }
+
+    int getReal()
+    {
+        return this->real;
+    }
+    int getimaginary()
+    {
+        return this->imaginary;
     }
 };
 
@@ -35,4 +43,6 @@ int main()
     cin >> r >> i;
     num.assignVal(r, i);
     num.display();
+    cout << "Real part is " << num.getReal() << endl;
+    cout << "Imaginary part is " << num.getimaginary() << endl;
 }

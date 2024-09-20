@@ -22,15 +22,22 @@ public:
 
     void display()
     {
-        cout << "Length:" << length << ", Breadth:" << breadth << ", Height:" << height << endl
+        cout << "Box \nLength:" << length << ", Breadth:" << breadth << ", Height:" << height << endl
              << "Color: " << color << endl;
     }
 };
 
 int main()
 {
+    cout << "----Box----" << endl;
     Box box;
-    box.acceptData(1, 2, 3, "red");
+    int l, b, h;
+    string col;
+    cout << "Enter length, breadth, height" << endl;
+    cin >> l >> b >> h;
+    cout << "Enter color: " << endl;
+    cin >> col;
+    box.acceptData(l, b, h, col);
     box.display();
     return 0;
 }

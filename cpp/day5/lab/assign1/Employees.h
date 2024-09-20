@@ -1,5 +1,6 @@
-// 1 Solve this.
-// Fresh business scenario to apply inheritance , polymorphism   to emp based organization scenario.
+// This file conatins declarations
+//  1 Solve this.
+//  Fresh business scenario to apply inheritance , polymorphism   to emp based organization scenario.
 
 #include <iostream>
 using namespace std;
@@ -7,6 +8,7 @@ using namespace std;
 class Emp
 {
 private:
+    static int idGenerator;
     int id, deptId;
     string name;
 
@@ -16,13 +18,14 @@ protected:
     // Constrs
 public:
     Emp();
-    Emp(int id, string name, int deptId, double basicSalary);
+    Emp(string name, int deptId, double basicSalary);
 
     // Methods
-    double computeNetSalary();
+    virtual double computeNetSalary();
+    string getName();
 };
 
-//_________________________________________________________________________________________________________
+//________________________________________________________________________________
 
 class Mgr : public Emp
 {
@@ -32,14 +35,13 @@ private:
 public:
     // constrs
     Mgr();
-    Mgr(int id, string name, int deptId, double basicSalary, double perfBonus);
+    Mgr(string name, int deptId, double basicSalary, double perfBonus);
 
     // methods
     double computeNetSalary();
 };
 
-//______________________________________________________________________________________________________
-
+//________________________________________________________________________________
 class Worker : public Emp
 {
 private:
@@ -48,7 +50,7 @@ private:
 
 public:
     Worker();
-    Worker(int id, string name, int deptId, double basicSalary, int houseWorked, float hourlyRate);
+    Worker(string name, int deptId, double basicSalary, int houseWorked, float hourlyRate);
 
     // methods
     double computeNetSalary();

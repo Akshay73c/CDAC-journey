@@ -4,18 +4,21 @@
 #include "Employees.h"
 using namespace std;
 
+// static var - idGenerator
+int Emp::idGenerator = 100;
+
 // constrs
 Emp::Emp()
 {
-    id = 1;
+    id = ++idGenerator;
     name = "John Doe";
     deptId = 1;
     basicSalary = 20000;
 }
 
-Emp::Emp(int id, string name, int deptId, double basicSalary)
+Emp::Emp(string name, int deptId, double basicSalary)
 {
-    this->id = id;
+    this->id = ++idGenerator;
     this->name = name;
     this->deptId = deptId;
     this->basicSalary = basicSalary;
@@ -26,4 +29,9 @@ Emp::Emp(int id, string name, int deptId, double basicSalary)
 double Emp::computeNetSalary()
 {
     return this->basicSalary;
+}
+
+string Emp::getName()
+{
+    return this->name;
 }

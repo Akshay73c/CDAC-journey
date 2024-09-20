@@ -7,10 +7,11 @@ using namespace std;
 // constrs
 Mgr::Mgr()
 {
+    // Default perf bonus
     perfBonus = 5000;
 }
 
-Mgr::Mgr(int id, string name, int deptId, double basicSalary, double perfBonus) : Emp(id, name, deptId, basicSalary)
+Mgr::Mgr(string name, int deptId, double basicSalary, double perfBonus) : Emp(name, deptId, basicSalary)
 {
     this->perfBonus = perfBonus;
 }

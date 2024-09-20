@@ -7,11 +7,12 @@ using namespace std;
 // constrs
 Worker ::Worker()
 {
+    // Default values
     hourlyRate = 50.0;
     hoursWorked = 4;
 }
 
-Worker ::Worker(int id, string name, int deptId, double basicSalary, int houseWorked, float hourlyRate) : Emp(id, name, deptId, basicSalary)
+Worker ::Worker(string name, int deptId, double basicSalary, int hoursWorked, float hourlyRate) : Emp(name, deptId, basicSalary)
 {
     this->hourlyRate = hourlyRate;
     this->hoursWorked = hoursWorked;
@@ -21,5 +22,6 @@ Worker ::Worker(int id, string name, int deptId, double basicSalary, int houseWo
 
 double Worker::computeNetSalary()
 {
-    return this->basicSalary + (hourlyRate * hoursWorked);
+    double totSalary = (hourlyRate * hoursWorked) + this->basicSalary;
+    return totSalary;
 }

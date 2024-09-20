@@ -1,12 +1,13 @@
 #include <iostream>
 #include "Employees.h"
+#include <typeinfo.h>
 using namespace std;
 
 int main()
 {
     cout << "-------Welcome to Organization-------" << endl;
 
-    Emp arr[20];
+    Emp *arr[20];
 
     int ch, index = 0;
     cout << "1.Hire manager\n2.Hire Worker\n3.Display all employees' details\n4.Exit" << endl;
@@ -20,23 +21,20 @@ int main()
         {
 
             cout << "-------Hire manager-------" << endl;
-            int id = 1, deptId;
+            int deptId;
             string name;
             double basicSalary, perfBonus;
             cout << "Enter name: ";
             cin >> name;
-            cout << "Enter deptId of dept of manager: ";
+            cout << "Enter deptId of the dept for manager: ";
             cin >> deptId;
             cout << "Enter basic Salary: ";
             cin >> basicSalary;
             cout << "Enter performance bonus: ";
             cin >> perfBonus;
 
-            Emp *empPtr;
-            Mgr manager = Mgr(id, name, deptId, basicSalary, perfBonus);
-            empPtr = &manager;
-            Mgr *mgrPtr = static_cast<Mgr *>(empPtr);
-            arr[index] = *mgrPtr;
+            Mgr *manager = new Mgr(name, deptId, basicSalary, perfBonus); // ptr of child class Mgr
+            arr[index] = manager;                                         // upcasting implicit
             index++;
             break;
         }
@@ -44,7 +42,7 @@ int main()
         {
 
             cout << "-------Hire Worker-------" << endl;
-            int id = 2, deptId, hoursWorked;
+            int deptId, hoursWorked;
             string name;
             double basicSalary;
             float hourlyrate;
@@ -59,19 +57,31 @@ int main()
             cout << "Enter hours Worked  ";
             cin >> hoursWorked;
 
-            Emp *empPtr;
-            Worker worker = Worker(id, name, deptId, basicSalary, hoursWorked, hourlyrate);
-            empPtr = &worker;
-            Worker *workerPtr = static_cast<Worker *>(empPtr);
-            arr[index] = *workerPtr;
+            Worker *worker = new Worker(name, deptId, basicSalary, hoursWorked, hourlyrate); // ptr of child class Worker
+            arr[index] = worker;
             index++;
             break;
         }
 
         case 3:
+            // Here we've to do dynamic downcasting
             for (int i = 0; i < index; i++)
             {
-                cout << "Net salary: " << arr[i].computeNetSalary() << endl;
+                // find type of ref stored at runtime using typeid()
+                if (typeid(*arr[i]) == typeid(Mgr))
+                {
+                    // downcast basePtr to childPtr-Mgr
+                    Mgr *mgrPtr = dynamic_cast<Mgr *>(arr[i]);
+                    cout << "Manager Name: " << mgrPtr->getName() << endl;
+                    cout << "Salary is: " << mgrPtr->computeNetSalary() << endl;
+                }
+                if (typeid(*arr[i]) == typeid(Worker))
+                {
+                    // downcast basePtr to childPtr-Worker
+                    Worker *workerPtr = dynamic_cast<Worker *>(arr[i]);
+                    cout << "Worker Name: " << workerPtr->getName() << endl;
+                    cout << "Salary is: " << workerPtr->computeNetSalary() << endl;
+                }
             }
 
             break;

@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-class BankAccount
+class MyBankAccount
 {
 private:
     int accountNo;
@@ -11,19 +11,21 @@ private:
 
 public:
     // default constr
-    BankAccount()
+    MyBankAccount()
     {
         accountNo = ++accountCount;
         name = "John Doe";
         balance = 0;
+        cout << "Sample account created for " << this->name << " !" << endl;
     }
 
     // Parameterized
-    BankAccount(string name, double balance)
+    MyBankAccount(string name)
     {
         this->accountNo = ++accountCount;
         this->name = name;
-        this->balance = balance;
+        this->balance = 0; // initial balance should be 0
+        cout << "Account created for " << this->name << " !" << endl;
     }
 
     // getters and setters
@@ -47,6 +49,7 @@ public:
     void deposit(double amt)
     {
         this->balance += amt;
+        cout << "Amount credited successfully!" << endl;
     }
 
     void display()
@@ -55,4 +58,4 @@ public:
         ;
     }
 };
-int BankAccount ::accountCount = 1000;
+int MyBankAccount::accountCount = 1000;
