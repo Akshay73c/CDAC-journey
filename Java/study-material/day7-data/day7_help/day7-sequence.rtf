@@ -1,0 +1,174 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Verdana;}}
+{\*\generator Riched20 10.0.22621}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs36\lang9 Today's topics\par
+1. Revise Interfaces\par
+2. Enter Exception Handling \par
+3. String Handling (Introduction)\par
+\par
+1. Answer this \par
+What is an interface ?\par
+Why Interfaces ?\par
+Syntax ?\par
+When to use extends keyword ?\par
+When to use implements  keyword  ?\par
+Can a class implement multiple interfaces ?  \par
+Can a class extend from  multiple super classes ? \par
+Can an interface extend from  multiple super interfaces ? \par
+Developing interfaces alone , sufficient or not ? \par
+Can you create interface instance ? \par
+What is the meaning of the term interface instance ? - implementation class instance\par
+eg - Connection instance | Comparator instance \par
+Printer interface <--- FilePrinter\par
+Can a super classs reference DIRECTLY refer to ANY sub class instance ? YES\par
+(eg - BankAccount myAccount=new SavingsAccount(...);)\par
+Can such super class ref access COMPLETE Details of the sub class directly ? NO\par
+To invoke sub class specific  functionality , what will you do ? down casting\par
+In case of wrong downcasting , what will happen ? ClassCastException\par
+Any solution ? - instanceof checking (RTTI)\par
+Can you achieve indirect referencing using interfaces ? YES\par
+eg - Printer printer=new FilePrinter(); //up casting\par
+Can interface reference DIRECTLY (w/o type casting) refer to ANY implementation class instance - YES\par
+eg : Bank - interface\par
+It has core banking methods - openAccount , closeAccount , withdraw,deposit etc\par
+implementation  classes : BOI , HDFC , ICICI\par
+Bank myBank=new Bank();//javac err - on RHS\par
+myBank=new HDFC(....); //up casting\par
+myBank.openAccount(....);//no javac err, run time poly.\par
+myBank=new ICICI(....);\par
+myBank.openAccount(...);\par
+Now suppose HDFC bank  added a new service - to manage Portfolios of the bank customers.\par
+Bank myBank;\par
+myBank=new HDFC(....);\par
+myBank.managePortfolio(....);//javac err\par
+Any solution ?\par
+((HDFC)myBank).managePortfolio(....);//no err\par
+myBank=new ICICI(....);\par
+((HDFC)myBank).managePortfolio(....);//classcast exc\par
+Any solution ?\par
+if(myBank instanceof HDFC)\par
+ ((HDFC)myBank).managePortfolio(....);\par
+else \par
+ sop("Services un available !!!!!!!!");\par
+2. \b Exception Handling\b0\par
+Refer to readme\par
+What is exception ? --Run time error detected by JVM\par
+\par
+2.1 \b Why exception handling ?\b0\par
+1. To continue with the program execution , even after run time errorss(eg :invalid inputs,Business Logic(B.L) failures,validation failures, file not found, invalid casting....)\par
+2. To separate business logic (B.L  in try block) from error handling logic(catch block)\par
+3. To avoid un necessary checking with boolean conditions\par
+\par
+2.2 \b Flow of exception handling\b0\par
+\par
+Eg. Consider a Trigger of the  Run time error \par
+In case of  int div by 0 - JVM creates n throws the exception to the code.\par
+Keyword used - throw \par
+Typical syntax : throw Throwable instance;\par
+In above case it uses -\par
+throw new ArithmeticException("/ by 0");\par
+\par
+Then JVM chks ---MATCHING catch clause\par
+If it exists -- control enters catch block n then continues there after , in the normal manner\par
+If it doesn't exist -- JVM supplies a default handler , which  aborts the code , printing useful information.\par
+\par
+NOTE -\par
+Currently "\b throw\b0 " keyword : is used by JVM to raise system exception (eg : ArithmeticException, ArrayIndexOutOfBoundsException, NullPointerException,ClassCastException,IOException, SocketException, SQLException etc)\par
+Later , programmer  will use the same \ldblquote throw" keyword to raise custom exception .\par
+\par
+2.3 \b Inheritance hierarchy\b0  of exception handling classes\par
+Refer to the diagram\par
+2.4 \b try-catch syntax. \b0\par
+Solve which ones are legal ?\par
+try \{....\} catch (ArithmeticException e )\{..\} : legal\par
+try \{....\} : illegal\par
+try \{....\} catch (ArithmeticException e )\{..\}  catch (NullPointerException e) \{..\} catch(Exception e) \{catch-all\} : legal\par
+\par
+try \{....\} catch(Exception e) \{....\} catch (ArithmeticException e )\{..\}  catch (NullPointerException e) \{..\} :illegal\par
+try \{....\} catch (ArithmeticException | NullPointerException e )\{..\}  catch(Exception e) \{....\} : legal\par
+\par
+try \{....\} catch(Exception e)\{...\} finally \{...\} : legal\par
+try \{....\} finally \{...\} catch(Exception e)\{..\} : illegal\par
+try \{....\} finally \{...\} : legal\par
+try \{....\} catch(ArithmeticException e)\{...\} finally \{...\} : legal\par
+2.5 \b checked vs un checked exceptions\b0\par
+who doesn't differentiate between checked vs un checked exceptions --JVM\par
+(Meaning : If there exists un handled checked or un checked exception : JVM will abort code\par
+who differentiates n how ? :  javac \par
+javac forces the handling of checked exceptions upon programmer\par
+\par
+2 ways of satisfying javac :\par
+for actual handling : try-catch\par
+OR\par
+throws keyword : for delegating the exception handling to the caller \par
+2.6 \b throw vs throws\b0  (keywords used in exception handling)\par
+throw :keyword used to  raise the  exception(JVM uses it to throw system/built-in exception  , Programmer uses it to throw custom exception), \par
+It appears in method definition.\par
+syntax : throw Throwable instance;\par
+throws : keyword meant for javac , appears in method declaration \par
+eg : public void show() throws IOException,InterruptedException\par
+\{\par
+ ......\par
+\}\par
+Meaning : show() : may throw the exception(indicates the possibility) , current method is NOT handling the exception/s\par
+so its' caller should handle.\par
+\par
+When is adding "throws" keyword mandatory ?\par
+Choose correct option -\par
+In case of unhandled checked exceptions\par
+In case of handled checked exceptions\par
+In case of unhandled unchecked exceptions\par
+In case of handled unchecked exceptions\par
+Option - 1\par
+What will happen otherwise?\par
+javac error !\par
+\par
+2.7 \b finally - a keyword in exception handling.\b0\par
+It represents a block which is  always executed\par
+(i.e in case of no exception as well as exception or even before a method returns) \par
+Only case in which it doesn\rquote t get called is -  JVM termination(System.exit(0))\par
+Typical use case  : cleaning up of non java resources(eg :  File handle, socket , db connection, standard  input )\par
+\par
+set up a demo of finally \par
+Use - TestFinally1.java \par
+2.8 \par
+\b try-with-resources syntax \par
+\b0 Added since JDK 1.7\par
+Newly added interface - java.lang.AutoCloseable\par
+Represents auto closeable objects.\par
+Method - public void close() throws Exception\par
+JVM automatically calls close() on the resources , opened in the try-with-resources block.\par
+syntax - try(AutoCloseable object/s)\par
+\{......\} //JVM - calls close() auto matically\par
+2.9  \b Custom exceptions\b0\par
+Objective : Accept speed of a vehicle from user (scanner) --running on a highway\par
+min speed : 30\par
+max speed : 80\par
+In case of speed outside the range --Programmer will have to detect the error , create instance of user defined exception class n explicitly throw custom exception to the code. \par
+The alteration in flow will be managed by JVM.\par
+Steps\par
+1.Create custom exception class : extends Throwable/Error/Exception/RuntimeExc....\par
+eg : public class SpeedOutOfRangeException extends Exception\{\par
+\}\par
+1.1  Add parameterised constructor : to initialize an  error message\par
+(i.e to call super class's parameterised ctor)\par
+\par
+java.lang.Exception(String errMesg)\par
+What will happen otherwise ?\par
+Excpetion object's err mesg will be inited to - null\par
+\par
+2. Create a separate class  for adding validation rules\par
+eg :  VehicleValidations\par
+2.1 add a static method for validation of the speed\par
+\par
+3. Create Tester for  UI using scanner \par
+\emdash Accept the speed n simply call validateSpeed of the VehicleValidations class\par
+\par
+4. New Objective (Lab exercise)\par
+PUC : Accept pollution level(1-100)  from user (scanner)\par
+If level > 20 %\par
+send alert : by  throwing suitable exception \par
+3. \b String Handling\par
+\b0 Refer to the overview diagram.\par
+\par
+}
+ 

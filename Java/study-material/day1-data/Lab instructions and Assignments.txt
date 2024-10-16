@@ -1,0 +1,18 @@
+Day 1
+1. Refer to "Installation Instructions" from day1-data\day1_help & complete the same.
+
+2. MUST go through "day1-data\day1_help\day1_sequence.rtf" and  from day1-data\day1_help\ & day1-data\day1_help\slides\PPTDay1.pdf
+(only till whatever  we have covered)
+
+3. Go through  code samples from day1-data\code\src
+
+4. Solve (Hands on)
+
+4.1 Display food menu to user. User will select items from menu along with the quantity. (eg 1. Dosa 2. Samosa 3. Idli ... 10 . Generate Bill ) Assign fixed prices to food items(hard code the prices)
+When user enters 'Generate Bill' option(10) , display total bill & exit.
+OR 
+Create java application for the following
+Accept 2 numbers from user & operation to perform
+1. Add 2.Subtract 3. Multiply 4.Divide 5.Exit
+Display the result of the operation. 
+Java app must continue to run till user chooses exit option.

@@ -1,0 +1,182 @@
+Revision of encapsulation
+(concept n implementation)
+
+Revise Packages
+Access Specifiers in detail
+Enter IDE
+Enter Arrays  
+Regarding "static" keyword 
+Enter "Inheritance" (if time permits !)
+
+
+1. Revise with code sample
+Box class in the package : com.app.core
+
+TestBox class in the package : com.app.tester
+p.s.v. main(...)
+	{
+	int data;//local var : un inited
+//	System.out.println(data);//javac error
+	Box b1;//b1 : class tpye of ref , mem alloc : stack
+//	System.out.println(b1);//javac error : un inited local var !
+ 
+	b1=new Box(10,5,6);//mem pic : Box class loaded in Method area , box cls instance in heap : CP , w,d,h
+	System.out.println(b1);//b1.toString ---> com.acts.core.Box@123456
+//	System.out.println(b1.width);//javac err
+	System.out.println(b1.getBoxDimensions());//10.0 5.0 6.0
+	System.out.println("Vol of the Box "+b1.getVolume());	//300.0
+	Box b2=b1; //copy of refs
+	System.out.println(b2);//com.acts.core.Box@123456
+	System.out.println(b2.getBoxDimensions());	//10.0 5.0 6.0
+	b1=null; //How many objs are marked for GC ?0
+//	System.out.println(b1.getBoxDimensions()); //throws the exc : java.lang.NullPointerException
+	System.out.println(b2.getBoxDimensions());//10.0 5.0 6.0
+
+	System.out.println("code continues 1");
+	b2=null;//How many objs are marked for GC ?	
+//	System.out.println(b2.getBoxDimensions());//throws the exc : java.lang.NullPointerException
+
+	System.out.println("code continues 2");
+	Box b3=new Box(1,2,3);
+        b3=new Box(2,3,4); //How many objs are marked for GC ?  2
+  }
+}
+
+
+2. Packages n classpath
+Refer : readme
+2. Add Box class under com.acts.core package n TestBox under com.acts.tester package n test it.
+2.1 Arrange the classes under <src> as per the packaged hierarchy
+2.2 compile from <src> 
+javac -d ..\bin com\acts\tester\TestBox.java
+
+2.3 How will you run it ?
+from <bin>
+java com.acts.tester.TestBox
+
+
+
+
+
+3. Refer to diags :understanding access specifiers
+Set it up & confirm the table.
+
+
+Enter IDE
+4. Solve this as Lab work
+1. Create Cubes
+In TestBox :
+s.o.p("Enter side of a cube");
+Create a cube
+Box cube  =new Box(sc.nextDouble());
+
+2. Add a method to Box class to compare equality of 2 boxes(based upon dimensions)
+eg : Box b1=new Box(1,2,3);
+Box b2=new Box(3,2,1);
+//chk if 2 boxes are equal
+boolean status=b1.isEqual(b2);
+
+
+
+
+
+
+3. Add a method to Box class to return a new Box with modified offset dims & test it with the tester.
+: lab work
+eg : 1st Box dims 10,20,30
+User enters offsets in dims  as 3,-4,5
+2nd box should have dims 13,16,35
+Hint in TestBox :
+Box b1=new Box(sc.nextDouble(),sc.nextDouble(),sc.nextDouble());
+sop("Enter offsets in dims : wOff , dOff hOff");
+Box b2=b1.createNewBox(sc.nextDouble(),sc.nextDouble(),sc.nextDouble());
+
+
+3. Regarding Arrays
+Refer : "Regarding Arrays.txt"
+
+2.1 Create Array of primitive types
+
+Objective -- Accept no of data samples(of type double) from User(using scanner)
+Create suitable array & display it using for-loop , to confirm default values.
+
+Accept data from User(scanner) & store it in the array.
+Display array data using  for loop.
+
+Display array data using for-each loop
+
+for-each loop(enhanced for loop)
+syntax
+eg : Display array data using for-each loop
+
+Important statement
+Works on a copy of array element.
+
+for-each limitations
+1. Can only iterate from 1st elem to last elem , with step size +1
+2. Works on a copy of array elems
+(can't be used for modifying array elems).
+
+-----------------
+2.2 Create Array of references
+
+Create a tester class  : TestBoxArray :in the  "com.app.tester" package
+
+Objective : Ask user(client) , how many boxes to make ?
+Accept Box dims 
+
+Store these details suitably.
+
+1. Display using single for-each loop, box dims n volume
+
+----------------------Pending---------------------
+
+
+
+2. Double box width for all boxes having volume > 100.(Can you USE for-each to solve this)
+(lab work)
+
+
+3. static keyword
+refer to readme
+
+4.
+Inheritance 
+refer to "readme inheritance.txt" from today's help.
+Person-Student-Faculty scenarion (constr invocation in inheritance hierarchy)
+
+
+What is inheritance ?
+Important part of OOP 
+Represents IS A relationship
+Higher hierarchy : super class
+lower hierarchy :sub class
+key word : extends
+As you go down the inheritance hierarchy --it's generailization ---> specialization
+Why : Reduces redundancy , increases re usability
+Universal super class : java.lang.Object
+
+
+eg : class Emp /*extends Object*/{....}
+class Mgr extends Emp {...}
+class SalesMgr extends Mgr {...}
+
+
+
+Types : single , multilevel  ,hierarchial , multiple (not supported) : ambiguity
+
+constr invocation in inheritance hierarchy : refer to diag.
+
+How to display details of student n faculty ?
+
+
+super keyword
+super keyword usages
+1. To invoke super cls constr (eg : super(fn,ln))
+2. To access super cls's accessible members (eg : super.toString())
+
+Important statements
+Sub class IS A super class + something more(addtional data members + methods) + something modofied(behaviour : methods : method overriding)
+
+
+

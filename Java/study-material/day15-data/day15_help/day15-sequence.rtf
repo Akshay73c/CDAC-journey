@@ -1,0 +1,170 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat{\fonttbl{\f0\fnil\fcharset0 Verdana;}{\f1\fnil Verdana;}}
+{\colortbl ;\red127\green0\blue85;\red0\green0\blue0;\red212\green212\blue212;\red106\green62\blue62;\red0\green0\blue192;}
+{\*\generator Riched20 10.0.22621}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs32\lang9\-Today's topics\par
+1. Revise advanced generic syntax\par
+2. super keyword in generics\par
+3. Revise Functional interface n lambda expressions\par
+4. Functional literal\par
+5. Java 8 Streams\par
+6. Enter Java I/O\par
+1. Solve \par
+Write a method to Find max number from List of any type (integer / float / double /string / LocalDate ) n return it to the caller.\par
+Test cases - ArrayList<Integer>\par
+Vector<Float> , LinkedList<Double>, ArrayList<LocalDate> , LinkedList<String> , ArrayList<Emp> ..... \par
+\par
+2. Write a method to print taste() of Collection of any fruit\par
+Test Cases - ArrayList<Apple> , HashSet<Orange> , TreeSet<Mango> ...\par
+\par
+\par
+3. Write a generic method to add multiple(var-args) elements to the specified List. \par
+eg - Add variable no of  fruits (Mango/Apple/Orange) to the Fruit Basket of type any List \par
+OR\par
+Add any emp(Mgr/Worker/SalesMgr/TempWorker ..) to any List \par
+Will this work ?\par
+\cf1\b\f1 public\cf2\b0  \cf1\b static\cf2\b0   \cf1\b void\cf2\b0  \highlight3 add\f0\lang16393 Emp\highlight0\f1\lang9 (List<Emp> \cf0\par
+\cf2\tab\cf4\f0\lang16393 list\cf2\f1\lang9 , Emp... \cf4\f0\lang16393 emps\cf2\f1\lang9 ) \{\cf0\par
+\cf2\tab\tab\cf1\b for\cf2\b0 (Emp \cf4\f0\lang16393 e\cf2\f1\lang9  : \cf4\f0\lang16393 emps\cf2\f1\lang9 )\cf0\par
+\cf2\tab\tab\tab\cf4 collection\cf2 .add(\cf4\f0\lang16393 e\cf2\f1\lang9 );\tab\cf0\par
+\cf2\}\par
+\f0\lang16393 In the Tester - \f1\lang9\par
+List<Mgr> \cf4 mgrs\cf2 =\cf1\b new\cf2\b0  ArrayList<>(List.\i of\i0 (\cf1\b new\cf2\b0  Mgr(1000), \cf1\b new\cf2\b0  Mgr(2000)));\cf0\par
+\cf2 GenericUtils.\highlight3\ul\i addAnyElements\highlight0\ulnone\i0 (\cf4 mgrs\cf2 , \cf1\b new\cf2\b0  Mgr(4000), \cf1\b new\cf2\b0  Mgr(5000));\cf0\par
+\cf2\tab\cf4 mgrs\cf2 .forEach(System.\cf5\b\i out\cf2\b0\i0 ::println);\par
+\par
+\f0\lang16393 Try this out !\par
+In summary - \par
+\cf0\lang9 Use PECS : Producer extends Consumer super\par
+Producer(Reader) => Collection acting as a producer of data  ,i.e you are using a collection in a read-only manner , use extends\par
+In this case , you will be NOT be able to add anything to such a collection other than null.\par
+Consumer(Writer) => Collection acting as a consumer of data  ,i.e you are using a collection in a write-only manner , use super \par
+In this case , you will be able to get Object type of reference only.\par
+\par
+\par
+What is a higher order function / method ?\par
+Any method which can accept a lambda expression (behavior) or can return lambda .\par
+eg - forEach , sort , removeIf\par
+Solve - \par
+List<String> strings=new ArrayList<>(Arrays.asList("one","two",......."hundred"));\par
+//remove all the strings starting with "t"\par
+strings.removeIf(s -> s.startsWith("t"));\par
+//sort the products from the map as per manufacture date.\par
+ArrayList<Product> list=new ArrayList<>(productMap.values());\par
+Collections.sort(list,(p1,p2) -> p1.getDate().compareTo(p2.getDate()));\par
+\par
+String s="hello";//literal string\par
+int data=100;\b\par
+\b0\par
+1 \b Use Function literal\b0\par
+Function literal is to assign anonymous function definition(i.e a lambda expression) to a variable.\par
+It adds simplicity / readablity to the code.\par
+eg -\par
+Comparator<Product> productComp=(p1,p2) -> p1.getDate().compareTo(p2.getDate());\par
+ArrayList<Product> list=new ArrayList<>(productMap.values());\par
+Collections.sort(list,productComp);\par
+\par
+2. Using above API(higher order functions) , can you chain multiple operations like sorting & displaying the sorted data ? \par
+OR\par
+Filter the elements n display filtered list.\par
+\par
+Objective : Accept product category from user\par
+remove all products from specified category n display remaining list \par
+Any Solution ?\par
+2. \b Enter Java 8 Functional Streams\b0\par
+Refer to <streams> : diagrams\par
+collections vs streams n streams basics\par
+Refer to "streams_sequence"\par
+\par
+3. \b Enter Java  I/O(Input / Output)\par
+\b0 Java supports handling of different \b devices\b0\par
+eg : Keyboard(System.in), Console(System.out), File(text file n bin files) ,networking Sockets(end point of communication in distributed computing) , Pipes(virtual data pipe existing between multiple threads) etc.\par
+\b I/O Streams\b0\par
+They represent data transfer to/from Java app n device\par
+Input stream : Reads data from device --> Java App\par
+Output stream : Writes data from Java App --> device\par
+The packages used for handling devices in Java : \b java.io\b0 , java.nio\par
+java.io : In case of any errs in read/write operation ---JVM throws : java.io.IOException\par
+(checked exc)\par
+read/write methods :blocking or non blocking ? : \b Represents blocking API\par
+\b0 Meaning : It causes the blocking of invoker thread , until read/write operation is complete.\par
+Inheritance hierarchy of classes in java.io\par
+refer : to a diagram\par
+\par
+I/O Stream -- represent data transfer (bytes/chars) from/to java app to/from device(eg : file , pipe,socket,memory,console...)\par
+For  reading data from data source into java  application : \b input stream\par
+\b0 For  writing data to data sink from java  application :output stream\par
+\par
+The package java.io contains - 2 types of strms\par
+1. Binary strms\par
+2. char strms\par
+4 abstract super classes in I/O hierarchy :  InputStream,OutputStream,Reader,Writer\par
+Node streams : device handling streams\par
+\par
+Buffering strms : Provides buffering (storing) of data\par
+\par
+Conversion streams\par
+\par
+Objective : \par
+1. copy text files using buffered streams\par
+i/p : src n dest file names\par
+API\par
+1. FileReader Constructor \par
+FileReader(String fileName) throws FileNotFoundException\par
+2. BufferedReader Constructor\par
+BufferedReader(Reader r)\par
+BufferedReader(Reader r,int size)\par
+To chain the I/O streams for reading text data , in a buffered manner :\par
+BufferedReader br=new BufferedReader(new FileReader(fileName));\par
+Methods of BufferedReader  \par
+1. public String readLine() throws IOException\par
+Tries to read next line of data from the buffer.\par
+Returns null at the end of stream (buffer) condition.\par
+OR use Functional Programming\par
+2. public Stream<String> lines()\par
+Returns a Stream, the elements of which are lines read from this BufferedReader.\par
+\par
+API \par
+1. FileWriter constructor\par
+FileWriter(String fileName) throws IOException\par
+It will create a new file if none exists or replaces the existiing file\par
+\par
+2. FileWriter constructor\par
+FileWriter(String fileName,boolean append) throws IOException\par
+It will create a new file if none exists or appends to existing file if append=true\par
+\par
+3. PrintWriter constructor\par
+PrintWriter(Writer w)\par
+Creates a new Printwriter , with a default size buffer.\par
+4. Methods of PrintWriter\par
+print , println , printf methods\par
+(similar to java.io.PrintStream)\par
+\par
+2. Enter Binary file handling streams \par
+2.1 Node streams -- FileInputStream , FileOutputStream\par
+2.2 Buffering of bin data : BufferedInputStream(InputStream in) , BufferedOutputStream(OutputStream out)\par
+Has similar constructors as earlier.\par
+2.3 Integration of Collection + I/O\par
+Store product details (from the Map) in the bin file.\par
+Restore the product details in to Map from bin file\par
+Steps\par
+1. Get populated list of products --store these details in a binary file , using binary streams\par
+1.1 Core classes  : Product , Category \par
+1.2 custom exception\par
+1.3 ShopUtils for collection utils \par
+Methods -\par
+populate list\par
+populate map\par
+1.4 IOUtils -- i/f\par
+add a static method --to store the  products in a bin file\par
+1.5 Tester : StoreProductDetails --\par
+Accept name of file from user n call our own API.\par
+2. Restore the product details from a bin file into map again.\par
+\par
+Use most advanced stream classes for serialization(object -> binary) and de-serialization\par
+ObjectOutputStream and ObjectInputStream\par
+(Refer to reademe seriliazation for more details)\par
+\par
+\par
+\par
+}
+ 

@@ -1,0 +1,15 @@
+delimiter //
+
+create procedure displayTri(in n int)
+begin 
+
+  declare str varchar(300) default "";
+  declare cnt int default 1;
+  while cnt <= n do
+    set str = concat(str, "\n", lpad('', cnt, '*'));
+set cnt = cnt+1;
+end while;
+select str;
+end //
+
+delimiter ;

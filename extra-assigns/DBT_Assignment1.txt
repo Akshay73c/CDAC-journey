@@ -1,0 +1,17 @@
+----  DBT Assignments  ----
+
+1.Create table actor(act_id primary key,act_name,act_gender)
+  Insert 5 records in actor.
+2.Create table director(dir_id primary key,dir_name,dir_phone)
+  Insert 5 records in actor.
+3.Create table Movie(Mov_id primary key,Mov_title,Mov_Realese_date,Mov_type,
+  dir_id as foreign key from director table and act_id as foreign key from actor table)
+  Insert 5 records in Movie.
+
+ Apply cascading for delete n update.
+ (consider suitable data type where needed).
+
+
+
+
+

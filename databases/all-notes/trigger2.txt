@@ -1,0 +1,4 @@
+create trigger newTrig before insert on myTable
+for each row
+insert into xyz
+values (new.id, new.name, new.tp, curdate());

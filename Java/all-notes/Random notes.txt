@@ -1,0 +1,10 @@
+Note: Since IllegalArgumentException:No enum const is an RunTime exception, no need to specify as throws.
+//		Javac doesn't care. yeah. But can i specify tho? Yeah ofc. then in outside caller fxn also, we CAN specify, but no need.
+//		is this right??
+//		How to now if a Runtime exception could be thrown or like how to know if an exception is a runtime exception?
+//		NO WAY ACTUALLY. Practice and learn ;)
+
+___________________________________________________________________________________________________________________________
+
+Always read off pending input tokens from the scanner.
+//it's pending coz in case of wrong input, Scanner throws exception and hadn't read the data //

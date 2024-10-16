@@ -1,0 +1,6 @@
+delimiter //
+create trigger myTrig before insert on myTable
+for each row
+set @x = 2;
+select @x;
+delimiter ;

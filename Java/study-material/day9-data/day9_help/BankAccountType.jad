@@ -1,0 +1,59 @@
+// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
+// Jad home page: http://www.kpdus.com/jad.html
+// Decompiler options: packimports(3) 
+// Source File Name:   BankAccountType.java
+
+package com.mybank.core;
+
+
+public final class BankAccountType extends Enum
+{
+
+    private BankAccountType(String s, int i, double minBalance)
+    {
+        super(s, i);
+        this.minBalance = minBalance;
+    }
+
+    public double getMinBalance()
+    {
+        return minBalance;
+    }
+
+    public String toString()
+    {
+        return (new StringBuilder(String.valueOf(name().toLowerCase()))).append("min bal ").append(minBalance).toString();
+    }
+
+    public static BankAccountType[] values()
+    {
+        BankAccountType abankaccounttype[];
+        int i;
+        BankAccountType abankaccounttype1[];
+        System.arraycopy(abankaccounttype = ENUM$VALUES, 0, abankaccounttype1 = new BankAccountType[i = abankaccounttype.length], 0, i);
+        return abankaccounttype1;
+    }
+
+    public static BankAccountType valueOf(String s)
+    {
+        return (BankAccountType)Enum.valueOf(com/mybank/core/BankAccountType, s);
+    }
+
+    public static final BankAccountType SAVING;
+    public static final BankAccountType CURRENT;
+    public static final BankAccountType FD;
+    public static final BankAccountType LOAN;
+    private double minBalance;
+    private static final BankAccountType ENUM$VALUES[];
+
+    static 
+    {
+        SAVING = new BankAccountType("SAVING", 0, 10000D);
+        CURRENT = new BankAccountType("CURRENT", 1, 5000D);
+        FD = new BankAccountType("FD", 2, 50000D);
+        LOAN = new BankAccountType("LOAN", 3, 25000D);
+        ENUM$VALUES = (new BankAccountType[] {
+            SAVING, CURRENT, FD, LOAN
+        });
+    }
+}

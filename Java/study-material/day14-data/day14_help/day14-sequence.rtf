@@ -1,0 +1,203 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Verdana;}{\f1\fnil Verdana;}}
+{\colortbl ;\red127\green0\blue85;\red0\green0\blue0;\red212\green212\blue212;\red106\green62\blue62;\red0\green0\blue192;\red0\green0\blue255;}
+{\*\generator Riched20 10.0.22621}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs32\lang9 Today's Topics\par
+1. Revise Hashing algorithm , with HashMap\par
+2. Advanced Generics\par
+3. Java 8 (Modern Java) new features n functional programming\par
+\par
+\par
+1. What will happen , with the following code ?\par
+Map<K,V> map=new HashMap<>();\par
+map.put(k1,v1);\par
+map.put(k2,v2);//k1 n k2 hashCode - different\par
+map.put(k3,v3);//k1 n k3 same hashCode\par
+map.put(k1,v4);\par
+map.put(k5,v5);//k2 n k5 same hashCode\par
+\par
+\par
+2. Advanced Generics\par
+Refer -  "generics sequence.txt"\par
+2.1  Generic methods \par
+eg : Arrays.asList , Collections.sort\par
+Solve Arrays.asList\par
+\par
+2.2 Create GenericUtils class as a  non generic class\par
+-Add a static method , to print all elements from any of the following\par
+ Test cases : AL<String> , LL<Integer> , Vector<LocalDate> , HS<Double> , LHS<Emp> ,TS<Fruit> \par
+Soln -\par
+public static void printElements(Collection<Object> collection) \{\par
+  for(...)\par
+   sop(o);\par
+\}\par
+Reason : Even though Object is a universal super class of all Java classes (i.e Integer IS-A Object, Fruit IS-A Object) , Collection<Object> IS NOT a super type of Collection<Integer>\par
+Meaning : inheritance in generics - works differently than otherwise.\par
+Why -- generic types(generic collections) are : Invariant (i.e can't be replaced by any other types)\par
+\par
+Solutions for the flexibilty\par
+1. generic method : <T>\par
+OR\par
+2  wild card : ?\par
+Represents ANY un known type , that can be replaced by any Java Type.\par
+\par
+3. Shuffle all the elements of the list randomly.\par
+Collections class Method\par
+public static void shuffle\u8203?(List<?> list)\par
+\par
+4. Reverse list elements\par
+\par
+5. Consider Emp inheritance hierarchy\par
+write a static method in the GenericUtils class -\par
+to return sum of salaries of all emps from the specified list.\par
+Test cases -- AL<Mgr> , Vector<TempWorker> , LinkedList<SalesMgr> ......\par
+\par
+\par
+6. Write a method to Find max number from List of any numbers (integer / float / double ...) n return it to the caller.\par
+ (Lab exercise)\par
+Test cases - ArrayList<Integer>\par
+Vector<Float> , LinkedList<Double>.....\par
+eg - public static <T extends Number & Comparable<T>> T findMaxNumber(List<T> list)\par
+\{....\}\par
+\par
+\par
+6.5 Explain \par
+public ArrayList\u8203?(Collection<? extends E> c)\par
+E - Animal\par
+Using this ctor , you can create a populated AL<Animal> from -  ANY Collection(AL | LL |Vector |HS|LHS|TS) from generic type - Animal or it's subtype (eg - Dog , Cat ....)\par
+\par
+\par
+7. Write a generic method to add all of the specified elements to the specified List. -- later\par
+eg - Add variable no of  fruits (Mango/Apple/Orange) to the Fruit Basket of type any List \par
+Add any emp(Mgr/Worker/SalesMgr/TempWorker ..) to any List \par
+Will this work ?\par
+\cf1\b\f1 public\cf2\b0  \cf1\b static\cf2\b0   \cf1\b void\cf2\b0  \highlight3 addAnyElements2\highlight0 (List<Emp> \cf0\par
+\cf2\tab\cf4 collection\cf2 , Emp... \cf4\f0\lang16393 emps\cf2\f1\lang9 ) \{\cf0\par
+\cf2\tab\tab\cf1\b for\cf2\b0 (Emp \cf4\f0\lang16393 e\cf2\f1\lang9  : \cf4\f0\lang16393 emps\cf2\f1\lang9 )\cf0\par
+\cf2\tab\tab\tab\cf4 collection\cf2 .add(\cf4\f0\lang16393 e\cf2\f1\lang9 );\tab\cf0\par
+\cf2\}\par
+\f0\lang16393 In the Tester - \f1\lang9\par
+List<Mgr> \cf4 mgrs\cf2 =\cf1\b new\cf2\b0  ArrayList<>(List.\i of\i0 (\cf1\b new\cf2\b0  Mgr(1000), \cf1\b new\cf2\b0  Mgr(2000)));\cf0\par
+\cf2\tab\tab GenericUtils.\highlight3\ul\i addAnyElements2\highlight0\ulnone\i0 (\cf4 mgrs\cf2 , \cf1\b new\cf2\b0  Mgr(4000), \cf1\b new\cf2\b0  Mgr(5000));\cf0\par
+\cf2\tab\tab\cf4 mgrs\cf2 .forEach(System.\cf5\b\i out\cf2\b0\i0 ::println);\par
+\f0\lang16393 -----------------\cf0\lang9\par
+Keywords in geenric syntax - \par
+? => un bounded wild card (i.e can be substituted by ANY type, no restrictions!)\par
+extends => upper bound (applies co variance in the inheritance hierarchy)\par
+super => lower bound (applies contra variance in the inheritance hierarchy)\par
+? extends T => T or any of it's sub type (restricted freedom --upper bounded )\par
+extends : used for co varinace (or co variant)\par
+eg - ? extends Animal\par
+? extends Fruit\par
+Use extends for read only type of collections(i.e to access the elements)\par
+BUT you can't add multiple bounds on ?\par
+Meaning - ? extends Animal and Swimmable\par
+(Animal - super class , Swimmable : i/f) \par
+- javac error !\par
+BUT can be used with T\par
+eg - public static <T extends Animal & Swimmable & Carnivorous> void printNames(Collection<T> collection)\par
+\{\par
+  for(Animal a : collection)\par
+   sop(a.getName());\par
+\}    \par
+\par
+? super T => T or it's super type (restricted freedom --lower bounded ) - contra variance\par
+Used in case of write only collections\par
+\par
+Is there any rule regarding when to use extends (upper bound) or super (lower bound) ?\par
+Yes !\par
+Any time you are accessing the elements from the collection --use extends\par
+=> co varinace\par
+Any time you are adding the elements to the collection --use super\par
+=> contra variance\par
+If you want to do both (i.e add n retrieve) : use the actual type directly\par
+=> in variance\tab\par
+8. Solve -  Ctor of ArrayList<E> \par
+ArrayList(Collection<? extends E> coll)\par
+E : Emp\par
+Meaning : Creates populated AL of type Emp from\par
+ANY Collection(eg : List n Set vimplementation classes) of type\par
+Emp or any of its sub type(eg : Mgr, Worker, SalesMgr....)\par
+\par
+\par
+Solve -\par
+T : Emp \par
+AL<? extends Emp> list = ????\par
+What all are legal options of RHS ?\par
+1. AL<Emp> : \par
+2. AL<Mgr>\par
+3. AL<Worker>\par
+4. AL <SalesMgr>\par
+5. AL <Object>\par
+6. AL<Fruit>\par
+7. AL<Vehicle>\par
+Ans :\par
+\par
+super : represents lower bound in generics\par
+? super T => T or it's super types\par
+\par
+eg\par
+AL<? super Mgr> list = ????\par
+What all are legal options of RHS ?\par
+1. AL<Emp> : \par
+2. AL<Mgr>\par
+3. AL<Worker>\par
+4. AL <SalesMgr>\par
+5. AL <Object>\par
+6. AL<Fruit>\par
+7. AL<Vehicle>\par
+Ans : \par
+\par
+\par
+2. \par
+Solve (What will happen)\par
+Given : Emp hierarchy\par
+Emp e =new Mgr(...);\par
+e=new Worker(...);\par
+List<Emp> emps=new ArrayList<>();\par
+emps.add(new Mgr(...));\par
+emps.add(new TempWorker(...));\par
+\par
+Understanding inheritance/flexibilty in generics -\par
+ArrayList<Emp> emps=new ArrayList<Mgr>();\par
+Reason : \par
+\par
+ArrayList<Object> emps=new ArrayList<Mgr>();//javac err !\par
+List<Emp> emps=new Vector<Worker>();//javac err !\par
+emps=new LinkedList<SalesMgr>();//javac err !\par
+\par
+Above states --loss of flexibility!!!\par
+So what's the solution for getting back this flexibility ?\par
+wild card in generics : ? \par
+? => any unknown type \par
+How do you create list of unknown type ???\par
+List<?> anyList;\par
+anyList=new ArrayList<Mgr>();//no err\par
+anyList=new Vector<Worker>();\par
+anyList=new LinkedList<SalesMgr>();\par
+anyList=new HashSet<>();//javac err , HS IS NOT a List\par
+anyList=new Vector<Fruit>();//works\par
+\par
+List<T> anyList;\tab\par
+\par
+PECS : Producer extends Consumer supers\par
+Producer(Reader) => Collection acting as a producer of data  ,i.e you can only access(Read) data\par
+extends \par
+\par
+Consumer(Writer) => Collection acting as a consumer of data  ,i.e you can only add elems\par
+super\par
+\par
+Try this - \par
+Example of strings having same hashcode\par
+Aa BB\par
+Ba CB \par
+Ca DB\par
+Da EB\par
+BBBB AaBB AaAa BBAa\par
+FB Ea\par
+Try adding these strings in HashSet<Emp> . Use these strings as emp ids . Observe n conclude.\par
+\par
+Additional reading - \par
+Red and Black Tree : \par
+{{\field{\*\fldinst{HYPERLINK https://www.geeksforgeeks.org/introduction-to-red-black-tree/ }}{\fldrslt{https://www.geeksforgeeks.org/introduction-to-red-black-tree/\ul0\cf0}}}}\f0\fs32\par
+}
+ 

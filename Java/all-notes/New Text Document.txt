@@ -1,0 +1,92 @@
+we cant create obj of abstract class. right. why? no body of fxn to execute if instance created.
+can we create ref of abstract class?
+very much yes. 
+
+absraction - hiding complexities or imple details from end user.
+
+abstraction is already achieved using encapsulation But to continue furthrt with abstraction when the details of implementation are unknown, java uses abstract keyword.
+
+abstract - is a keyword in java. applicable at methods and classes.
+abstract methods - only with declaration and no defination
+
+ex. public abstract double computeArea(); in BoundedShape superclass
+
+private|static|final abstract double area();
+ when we say abstract, it has to be implemented somewhere. and we know private|static|final cant be overridden. hence error.
+
+a class containing abstract method must be declared as a abstract class
+
+abstract classes -> partial abstraction
+
+WE CAN HAVE (AND SHOULD HAVE, MUST HAVE) CONSTR IN ABSTRACT CLASS!!
+why???? - to init its own private data members while creating concrete sub class instance!! (we'll call that constr using super in subclass. ooohh)
+
+abstact => needs to be extended 
+
+can an abstract class be created with 100% concrete functionality? -> YES!!
+ex. httpServlet class
+
+final => constant रट लो.
+	a keywword in java indicating constant.
+final primitive data membs are immutable.
+
+final methods cannot be overriden. 
+ex. object class methods - wait, notify, notifyAll
+
+final classes cannot be extended.
+ex. String, StringBuffer, StringBuilder, 
+
+final references cannot be re-assigned. 
+ex. final Emp e = new Mgr();
+e = new Worker() //javac err
+
+________________________________________________________________________________________
+
+interface  - to achieve FULL abstraction
+	     supports the fxnality of multiple inheritance
+	     allows complete separtion betn specification(what) and implementation(how) c\a loose coupling - 		
+blueprint for creating implementation class
+
+java compiler implicitly adds 'public' and 'abstract' keywords AND 'public static final' keywords before the data membs. 
+
+syntax: 
+	access specifiers - default or public 
+	<accessSpecifier> interface <NameOfInterface> extends <comma separated list of super interfaces>
+
+ONE INTERFACE CAN EXTEND FROM MULTIPLE SUPER INTERFACES. 
+
+ONE CLASS CAN IMPLEMENT MULTIPLE INTERFACES.
+
+=> thus java supports multiple inheritance
+
+syantx:
+	<accessSpecifer> class <NameClass> extends <Superclass> implements <comma separted list of interfaces> {
+
+	//MUST implement all the abstract methods inherited frm all the interfaces.
+}
+
+ex. public class Circle extends BoundedShape implements Computable, Runnable {...}
+
+optional annotation to tell the javac about implementing methods - @Override
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
